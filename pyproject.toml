@@ -1,15 +1,22 @@
-[tool.black]
-line-length = 120
-target-version = ["py36", "py37", "py38"]
-extend-exclude = "robosuite/((models/assets)|(controllers/config))"
-
-[tool.isort]
-profile = "black"
-line_length = 120
-skip = ["__init__.py"]
-filter_files = true
-py_version = "all"
-extend_skip = [
-    "robosuite/models/assets",
-    "robosuite/controllers/config",
+[project]
+name = "robosuite"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = "==3.10.*"
+dependencies = [
+    "imageio[ffmpeg]>=2.37.0",
+    "jax>=0.5.3",
+    "mink>=0.0.5",
+    "mujoco>=3.2.3",
+    "numba>=0.61.2",
+    "numpy>=1.26.4",
+    "opencv-python>=4.11.0.86",
+    "pillow>=11.1.0",
+    "pynput>=1.8.1",
+    "pytest>=8.3.5",
+    "rich>=14.0.0",
+    "scipy>=1.15.2",
+    "termcolor>=3.0.1",
+    "tqdm>=4.67.1",
 ]
