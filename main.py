@@ -5,6 +5,8 @@ import jax
 import numpy as np
 from rich.pretty import pprint
 from tqdm import tqdm
+from robosuite.controllers.parts.stack_controller import StackController
+
 
 import robosuite as suite
 from robosuite.environments import MujocoEnv
@@ -106,8 +108,13 @@ def main():
         control_freq=50,
         camera_names=camera_names,
         renderer="mujoco",
+        controller_configs=load_controller_config(default_controller="OSC_POSE"),
+        
     )
-    obs = env.reset()
+    env.reset()
+    env.robots[0].controller = StackController(env)
+    
+
 
     # camera_name = ["agentview", "birdview", "all-eye_in_hand", "robot_view"]
     # env.viewer.set_camera(camera_name=names)
