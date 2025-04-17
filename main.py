@@ -108,24 +108,24 @@ def main():
         control_freq=50,
         camera_names=camera_names,
         renderer="mujoco",
-        controller_configs=load_controller_config(default_controller="OSC_POSE"),
-        
     )
     env.reset()
-    env.robots[0].controller = StackController(env)
     
+    controller = StackController(env)
 
-
+    
     # camera_name = ["agentview", "birdview", "all-eye_in_hand", "robot_view"]
     # env.viewer.set_camera(camera_name=names)
 
     spec = lambda arr: jax.tree.map(lambda _x: _x.shape, arr)
-    pprint(spec(dict(obs)))
+    #pprint(spec(dict(obs)))
     frames = []
 
     for i in tqdm(range(100)):
-        action = np.random.randn(*env.action_spec[0].shape) * 1
-        obs, reward, done, info = env.step(action)  # take action in the environment
+        #action = np.random.randn(*env.action_spec[0].shape) * 1
+        #obs, reward, done, info = env.step(action)  # take action in the environment
+        action = controller.position_above_block_A()
+        obs, reward, done, info = env.step(action)
         # out = env.render()  # render on display
 
         # input('Input: ... ')
